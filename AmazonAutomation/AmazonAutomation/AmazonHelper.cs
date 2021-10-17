@@ -47,10 +47,12 @@ namespace AmazonAutomation
         {
             try
             {
-                string email = "9423270662";
-                string password = "Ready2wrk@NVIDIA";
+                string email = "9423272";
+                string password = "Ready2@";
                 ClickIfPresent(By.Id("nav-link-accountList"));
                 Global.driver.SwitchTo().Window(Global.driver.WindowHandles.Last());
+                SendKeysIfPresent(By.Id("ap_email"), email);
+                SendKeysIfPresent(By.Id("ap_email"), email);
                 SendKeysIfPresent(By.Id("ap_email"), email);
                 ClickIfPresent(By.Id("continue"));
                 Global.driver.SwitchTo().Window(Global.driver.WindowHandles.Last());
@@ -72,6 +74,7 @@ namespace AmazonAutomation
             {
                 if (Global.driver.FindElement(by) != null)
                 {
+                    ClickIfPresent(By.Id("continue"));
                     Thread.Sleep(1000);
                     return true;
                 }
@@ -102,6 +105,7 @@ namespace AmazonAutomation
                 {
                     Console.WriteLine("NOT CLICKED {0} ", by);
                     Thread.Sleep(1000);
+                    ClickIfPresent(By.Id("continue"));
                     throw new TestException("ClickIfPresent did not load");
                 }
             }
@@ -119,6 +123,8 @@ namespace AmazonAutomation
                 {
                     Global.driver.FindElement(by).Clear();
                     Thread.Sleep(1000);
+                    ClickIfPresent(By.Id("continue"));
+
                     Global.driver.FindElement(by).SendKeys(sendkeys);
                     Thread.Sleep(500);
                     Console.WriteLine("Send Keys--> {0} to {1} ", sendkeys, by);
