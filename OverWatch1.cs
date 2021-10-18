@@ -66,12 +66,14 @@ namespace GamePlayRun
 
         public bool IsGameInstalled()
         {
+        log.WriteLine("Game closed", LogType.INFO);
             return steam_instance.IsGameSupport(gameID);
         }
 
         //from FrozaHorizon.cs
         public bool StartPlayback(Dictionary<string, int> settings)
         {
+        log.WriteLine("Game closed", LogType.INFO);
             return SetGameSettingsAndStartGamePlay(settings);
         }
 
@@ -82,6 +84,7 @@ namespace GamePlayRun
             isPageFound = CheckPage(OverWatchPage.StartPage, 120);
             if (isPageFound)
             {
+            log.WriteLine("Game closed", LogType.INFO);
                 log.WriteLine("Start page Found. Pressing Enter");
                 Win32.SimulateKeyPressBySendInput(Keys.Enter);
                 Thread.Sleep(3000);
@@ -95,6 +98,7 @@ namespace GamePlayRun
             isPageFound = CheckPage(OverWatchPage.ContinueSettingsPage, 30);
             if (isPageFound)
             {
+            log.WriteLine("Game closed", LogType.INFO);
                 log.WriteLine("Continue settings page Found. Pressing Down and Enter");
                 Win32.SimulateKeyPressBySendInput(Keys.Down);
                 Thread.Sleep(500);
@@ -105,6 +109,7 @@ namespace GamePlayRun
             isPageFound = CheckPage(OverWatchPage.OptionsPage, 120);
             if (isPageFound)
             {
+            log.WriteLine("Game closed", LogType.INFO);
                 log.WriteLine("Options page Found.");
                 if (isSettingsRequired)
                 {
@@ -118,6 +123,9 @@ namespace GamePlayRun
             }
             else
             {
+            log.WriteLine("Video Settings page Found. Pressing Enter to continue");
+                    Win32.SimulateKeyPressBySendInput(Keys.Down);
+                    Thread.Sleep(500);
                 log.WriteLine("Options Page not found");
                 return false;
             }
@@ -150,6 +158,9 @@ namespace GamePlayRun
                     }
                     else
                     {
+                    log.WriteLine("Video Settings page Found. Pressing Enter to continue");
+                    Win32.SimulateKeyPressBySendInput(Keys.Down);
+                    Thread.Sleep(500);
                         ClickMidPoint(rect);
                         Win32.SimulateKeyPressBySendInput(Keys.Right);
                         Thread.Sleep(1000);
